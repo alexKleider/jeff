@@ -3,6 +3,7 @@
 # File: recipies.py
 
 import os
+import sys
 import urllib
 import chardet
 from html.parser import HTMLParser
@@ -46,26 +47,29 @@ class MyHTMLParser(HTMLParser):
         print("Num ent  :", c)
     def handle_decl(self, data):
         print("Decl     :", data)
-    def handle_data(self, data):
-        datum = data.strip()
-        if self.show_datum:
-            self.data.append(datum)
-            print("Data: ", data)
+#   def handle_data(self, data):
+#       datum = data.strip()
+#       if self.show_datum:
+#           self.data.append(datum)
+#           print("Data: ", data)
 #           self.show_datum = False
-d = 'Recipies'
-count = 0 
-for f in os.listdir(path=d):
-    count += 1
-f = "There are {} recipies."
-if count > 300:
-    f =  "There are {} recipies!"
-print(f.format(count))
+#d = 'Recipies'
+#count = 0 
+#for f in os.listdir(path=d):
+#    count += 1
+#f = "There are {} recipies."
+#if count > 300:
+#    f =  "There are {} recipies!"
+#print(f.format(count))
 
-f = "test.html"
+if len(sys.argv) > 1:
+    f = sys.argv[1]
+else:
+    f = "test.html"
 with open(f, "br") as infile:
     page = infile.read()
 encoding = chardet.detect(page)
-print("Encoding is '{}'.".format(encoding))
+#print("Encoding is '{}'.".format(encoding))
 page = page.decode(encoding['encoding'])
 
 parser = MyHTMLParser()
