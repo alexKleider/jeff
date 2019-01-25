@@ -61,7 +61,7 @@ if count > 300:
     f =  "There are {} recipies!"
 print(f.format(count))
 
-f = "Recipies/#18.html"
+f = "test.html"
 with open(f, "br") as infile:
     page = infile.read()
 encoding = chardet.detect(page)
